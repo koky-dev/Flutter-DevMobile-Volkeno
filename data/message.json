@@ -1,0 +1,30 @@
+[
+  {
+    "subject": "Mon premier message",
+    "body": "Voici le contenu de mon premier message"
+  },
+  {
+    "subject": "Mon deuxième message",
+    "body": "Voici le contenu de mon deuxième message"
+  },
+  {
+    "subject": "Mon troisième message",
+    "body": "Voici le contenu de mon troisième message"
+  },
+  {
+    "subject": "Bon Ramadan à tous",
+    "body": "Je vous souhaite un excellent Ramadan à tous, et que Dieu exauce nos prières, efface nos pêchés et nous débarasse le plutôt possible de ce virus."
+  },
+  {
+    "subject": "Documents envoyés",
+    "body": "Bonjour, Vous trouverez sur votre bureau les documents de contrat. Merci"
+  },
+  {
+    "subject": "Fichiers mis à jour",
+    "body": "Bonjour, veuillez noter que les fichiers ont été mis à jour. Merci"
+  },
+  {
+    "subject": "Push réussi",
+    "body": "Bonjour, Le push de notre projet flutter avec Volkeno sur Github a bien réussi. Veuillez visiter le site pour plus de détails."
+  }
+]
