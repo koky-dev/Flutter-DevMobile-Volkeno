@@ -1,6 +1,8 @@
 
+import 'package:emailapp/MessageDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:emailapp/Message.dart';
+import 'package:emailapp/ComposeButton.dart';
 
 
 class MessageList extends StatefulWidget {
@@ -13,13 +15,20 @@ final String title;
 }
 
 class _MessageListState extends State<MessageList> {
-Future<List<Message>> messages;
+Future<List<Message>> future;
+List<Message> messages;
+
 
 
 void initState(){
   super.initState();
 
-  messages = Message.browse();
+ fetch();
+}
+
+void fetch() async {
+  future = Message.browse();
+  messages = await future;
 }
   
   @override
@@ -28,8 +37,9 @@ void initState(){
       appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.refresh), onPressed: () {
-            var _messages = Message.browse();
+          IconButton(icon: Icon(Icons.refresh), 
+            onPressed: () async {
+            var _messages = await Message.browse();
 
             setState(() {
               messages = _messages;
@@ -38,7 +48,7 @@ void initState(){
         ],
       ),
       body: FutureBuilder(
-        future: messages, 
+        future: future, 
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -65,14 +75,21 @@ void initState(){
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
+                      onTap: () {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => MessageDetail(message.subject, message.body)
+                            ),
+                        );
+                      },
                   );
                 }
               );
           }
         },
-        )
-      
-     
+        ),
+        floatingActionButton: ComposeButton(messages),
     );
   }
 }
