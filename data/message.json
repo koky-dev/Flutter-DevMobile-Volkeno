@@ -26,5 +26,9 @@
   {
     "subject": "Push réussi",
     "body": "Bonjour, Le push de notre projet flutter avec Volkeno sur Github a bien réussi. Veuillez visiter le site pour plus de détails."
+  },
+  {
+    "subject": "Reston chez nous",
+    "body": "Rester chez soi, c'est sauver les autres."
   }
 ]
