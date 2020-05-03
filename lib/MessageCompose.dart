@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:emailapp/Message.dart';
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 
 class MessageCompose extends StatefulWidget {
   @override
@@ -27,6 +28,14 @@ class _MessageComposeState extends State<MessageCompose> {
           children: <Widget>[
             ListTile(
               title: TextFormField(
+                  validator: (value) {
+                    if (!EmailValidator.validate(value)) {
+                      return "Format d'adresse e-mail invalide";
+                    }
+                    else if (value.isEmpty) {
+                      return "Veuillez remplir ce champ.";
+                    }
+                  },
                   onSaved: (value) => to = value,
                   decoration: InputDecoration(
                     labelText: 'A',
@@ -36,6 +45,14 @@ class _MessageComposeState extends State<MessageCompose> {
             ),
             ListTile(
               title: TextFormField(
+                  validator: (value) {
+                    int len = value.length;
+                    if (value.isEmpty) {
+                      return "Veuillez remplir ce champs";
+                    } else if(len < 4) {
+                      return "Minimum 4 caractères";
+                    }
+                  },
                   onSaved: (value) => subject = value,
                   decoration: InputDecoration(
                     labelText: 'Objet',
@@ -47,6 +64,14 @@ class _MessageComposeState extends State<MessageCompose> {
             Divider(),
             ListTile(
               title: TextFormField(
+                  validator: (value) {
+                    int len = value.length;
+                    if (value.isEmpty) {
+                      return "Veuillez remplir ce champs";
+                    } else if(len < 15) {
+                      return "Minimum 15 caractères";
+                    }
+                  },
                 onChanged: (value) =>  body = value,
                 decoration: InputDecoration(
                   labelText: 'Message',
@@ -59,10 +84,12 @@ class _MessageComposeState extends State<MessageCompose> {
               title: RaisedButton(
                 child: Text("Envoyer"),
                 onPressed: () {
-                  key.currentState.save();
-                  Message message = Message(subject, body);
+                  if (this.key.currentState.validate()) {
+                    key.currentState.save();
+                    Message message = Message(subject, body);
 
-                  Navigator.pop(context, message);
+                    Navigator.pop(context, message);
+                  }
                 },
               ),)
             ],
