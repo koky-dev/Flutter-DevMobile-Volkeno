@@ -1,5 +1,6 @@
+import 'package:emailapp/ContactManager.dart';
+import 'package:emailapp/Provider.dart';
 import 'package:flutter/material.dart';
-import 'package:emailapp/MessagesList.dart';
 
 import 'App.dart';
 
@@ -9,11 +10,14 @@ void main() => runApp(EmailApp());
 class EmailApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.indigo, accentColor: Colors.red),
-      home: App(),
-      debugShowCheckedModeBanner: false,
+    return Provider(
+      data: ContactManager(),
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(primarySwatch: Colors.pink, accentColor: Colors.red),
+          home: App(),
+          debugShowCheckedModeBanner: false,
+        ),
     );
   }
 }
